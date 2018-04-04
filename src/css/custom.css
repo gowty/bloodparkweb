@@ -1,0 +1,26 @@
+/* CUSTOM STYLES */
+
+.navbar {
+  background: #8A0707;
+}
+
+.nav-brand {
+  font-weight: 600;
+  font-size: 20px;
+  color: #fff;
+}
+
+.nav-brand > span {
+  color: #fff;
+}
+
+.blood-icon {
+  color: #fff;
+}
+
+.nav-content {
+  color:#fff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Merriweather Sans', sans-serif;
+}
