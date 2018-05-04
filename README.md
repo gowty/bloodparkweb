@@ -18,16 +18,19 @@
    - username
    - password
    - email
+
 2. "/signin"<br/>
    - method(post)<br/>
    allows user to sign in and serves token and user credentials with following details<br/>
    - username or email
    - password
+
 3. "/auth"<br/>
    - method(get)<br/>
    verifies jwt token and authenticates user with token in header
    - header
      -authorization(token)
+     
 4. "/create-forgot-password-link"<br/>
    - method(post)<br/>
    allows user to generate forgot password link and sends to email id<br/>
