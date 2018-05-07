@@ -15,6 +15,54 @@ function tokenForUser(user){
   )
 }
 
+function validateEmail(email) {
+  var x = email;
+  var atpos = x.indexOf('@');
+  var dotpos = x.lastIndexOf('.');
+  if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+exports.signup = function(req,res,next){
+  const email = req.body.email;
+  const password = req.body.password;
+  const username = req.body.username;
+  if(validateEmail(email)==false){
+    return res.status(422).send({error:"please enter a valid email id"})
+  }
+  if(!email||!password||!username){
+    return res.status(422).send({error:"checkout all field"})
+  }
+  // check wheather email id exists in db
+  User.findOne({email:email},function(err,existingUser){
+    if(err){return next(err)}
+
+    if(existingUser){
+      return res.status(422).send({error:"email is in use"})
+    }
+  // create user
+  const user = new User({
+    email:email,
+    password:password,
+    username:username
+  })
+  // save user
+  user.save(function(err){
+    if(err){return next(err)}
+    res.json({token:tokenForUser(user),user:user})
+  })
+
+  })
+}
+
+exports.signin = function(req,res,next){
+  res.send({token:tokenForUser(req.user),user:req.user})
+}
+
 exports.createforgotpasswordlink = function(req,res,next){
   let email = req.body.email;
   User.findOne({email:email},function(err,existingUser){
@@ -59,40 +107,5 @@ exports.createforgotpasswordlink = function(req,res,next){
     }else{
       res.send({error:"username does not exists"})
     }
-  })
-}
-
-exports.signin = function(req,res,next){
-
-  res.send({token:tokenForUser(req.user),user:req.user})
-}
-
-exports.signup = function(req,res,next){
-  const email = req.body.email;
-  const password = req.body.password;
-  const username = req.body.username;
-
-  if(!email||!password||!username){
-    res.status(422).send({error:"checkout all field"})
-  }
-  // check wheather email id exists in db
-  User.findOne({email:email},function(err,existingUser){
-    if(err){return next(err)}
-
-    if(existingUser){
-      return res.status(422).send({error:"email is in use"})
-    }
-  // create user
-  const user = new User({
-    email:email,
-    password:password,
-    username:username
-  })
-  // save user
-  user.save(function(err){
-    if(err){return next(err)}
-    res.json({token:tokenForUser(user),user:user})
-  })
-
   })
 }
