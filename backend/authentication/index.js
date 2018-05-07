@@ -11,12 +11,13 @@ mongoose.connect("mongodb://localhost/auth")
 // app setup
 const app = express();
 app.use(morgan('combined'));
-app.use(bodyParser.json({type:"*/*"}));
+
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true   }));
 router(app);
 
 // server setup
-const port = process.env.PORT || 65000;
+const port = process.env.PORT || 5000;
 
 // const server = http.createServer(app);
 
