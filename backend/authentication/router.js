@@ -1,7 +1,6 @@
 const authentication = require("./controllers/authentication");
 const passportStrategy = require("./services/passport");
 const passport = require("passport");
-const jwt_decode = require("jwt-decode");
 const User = require("./models/usermodel.js");
 const express = require("express");
 const path = require("path");
