@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
-import '../css/App.css';
+import '../css/custom.css';
 
 class Navbar extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <a className="navbar-brand nav-brand">
+                <i className="fas fa-tint blood-icon"></i> <span>BloodPark</span>
+              </a>
+            </div>
+            <div className="collapse navbar-collapse" id="myNavbar">
+              <ul className="nav navbar-nav navbar-right nav-content">
+                <li><a style={{color:"#fff"}}><i className="fas fa-reply"></i> Blood Request</a></li>
+                <li><a style={{color:"#fff"}}><i className="fas fa-heartbeat"></i> Become a Donor</a></li>
+                <li><a style={{color:"#fff"}}><i className="fab fa-hubspot"></i> About BloodPark</a></li>
+                <li><a style={{color:"#fff"}}><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
     );
   }
